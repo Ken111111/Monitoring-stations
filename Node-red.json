@@ -1,0 +1,769 @@
+[
+    {
+        "id": "2960a91d4027dbbd",
+        "type": "tab",
+        "label": "Đồ Án Hệ Thống Nhúng",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4490fbaf6ae2df07",
+        "type": "mqtt in",
+        "z": "2960a91d4027dbbd",
+        "name": "Nhiệt Độ",
+        "topic": "Tem",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "51df87ab5fb6d1e4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 320,
+        "wires": [
+            [
+                "9981febfe534832e",
+                "28ae58c4368c37bc",
+                "4007ce894e54ea20",
+                "e66084afef932a88"
+            ]
+        ]
+    },
+    {
+        "id": "9981febfe534832e",
+        "type": "ui_gauge",
+        "z": "2960a91d4027dbbd",
+        "name": "Nhiệt độ",
+        "group": "538e811e.4dc51",
+        "order": 3,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Nhiệt Độ",
+        "label": "*C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "30",
+        "seg2": "60",
+        "diff": false,
+        "className": "",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b1535f679d104703",
+        "type": "mqtt in",
+        "z": "2960a91d4027dbbd",
+        "name": "Độ ẩm",
+        "topic": "Hum",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "51df87ab5fb6d1e4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 400,
+        "wires": [
+            [
+                "c4610d9babaa7d5a",
+                "28ae58c4368c37bc",
+                "4007ce894e54ea20",
+                "9bc11d9588c1262b"
+            ]
+        ]
+    },
+    {
+        "id": "c4610d9babaa7d5a",
+        "type": "ui_gauge",
+        "z": "2960a91d4027dbbd",
+        "name": "Độ ẩm",
+        "group": "538e811e.4dc51",
+        "order": 5,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Độ Ẩm",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 790,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "28ae58c4368c37bc",
+        "type": "ui_chart",
+        "z": "2960a91d4027dbbd",
+        "name": "Biểu Đồ Nhiệt Độ & Độ Ẩm",
+        "group": "538e811e.4dc51",
+        "order": 8,
+        "width": 5,
+        "height": 6,
+        "label": "Biểu đồ \" Nhiệt Độ & Độ Ẩm \"",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#008ff5",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#e91c1c",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 860,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4007ce894e54ea20",
+        "type": "debug",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "e66084afef932a88",
+        "type": "function",
+        "z": "2960a91d4027dbbd",
+        "name": "Set flow Nhiệt độ",
+        "func": "var Tem;\nTem = msg.payload;\nflow.set(\"Tem\",Tem);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 880,
+        "wires": [
+            [
+                "a8fbbccecb7c2bb0"
+            ]
+        ]
+    },
+    {
+        "id": "9bc11d9588c1262b",
+        "type": "function",
+        "z": "2960a91d4027dbbd",
+        "name": "Set flow Độ ẩm",
+        "func": "var Hum;\nHum = msg.payload;\nflow.set(\"Hum\",Hum);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 940,
+        "wires": [
+            [
+                "a8fbbccecb7c2bb0"
+            ]
+        ]
+    },
+    {
+        "id": "a8fbbccecb7c2bb0",
+        "type": "function",
+        "z": "2960a91d4027dbbd",
+        "name": "Data",
+        "func": "var time = new Date();\nvar Tem =flow.get(\"Tem\");\nvar Hum =flow.get(\"Hum\");\nvar Per =flow.get(\"Per\");\nvar CO2 =flow.get(\"Gas\");\nvar BUI =flow.get(\"BUI\");\nif (Tem == null || Hum == null || Per == null || BUI == null )\n{\n    return;\n    \n}\nelse\n{\n    var A = {\"Nhiệt ĐỘ\":Tem, \"Độ ẩm\":Hum, \"Áp suất\":Per, \"CO2\":CO2,  \"Bụi\": BUI, \"Time\":time};\n}\nmsg.url = \"mongodb+srv://Ken:Kennguyen2001@cluster0.pjdpj.mongodb.net/DAHTN?retryWrites=true&w=majority\";\nmsg.db_name = \"DAHTN\";\nmsg.db_collection = \"Test2\";\nmsg.payload = A\nreturn msg; \n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 960,
+        "wires": [
+            [
+                "93fc41ebd2be8212"
+            ]
+        ]
+    },
+    {
+        "id": "beba25885860385a",
+        "type": "debug",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "2762be124c419722",
+        "type": "mqtt in",
+        "z": "2960a91d4027dbbd",
+        "name": "Áp suất",
+        "topic": "Per",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "51df87ab5fb6d1e4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 480,
+        "wires": [
+            [
+                "3f2dff698147dce4",
+                "951b40559df1a9a4",
+                "0f101d01183bd2fa",
+                "4007ce894e54ea20"
+            ]
+        ]
+    },
+    {
+        "id": "3f2dff698147dce4",
+        "type": "ui_gauge",
+        "z": "2960a91d4027dbbd",
+        "name": "Áp suất",
+        "group": "4be2d3e144a06d0d",
+        "order": 2,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Áp suất",
+        "label": "hPa",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "1500",
+        "seg2": "1600",
+        "className": "",
+        "x": 800,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "951b40559df1a9a4",
+        "type": "function",
+        "z": "2960a91d4027dbbd",
+        "name": "Set flow Áp suất",
+        "func": "var Per;\nPer = msg.payload;\nflow.set(\"Per\",Per);\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 980,
+        "wires": [
+            [
+                "a8fbbccecb7c2bb0"
+            ]
+        ]
+    },
+    {
+        "id": "0f101d01183bd2fa",
+        "type": "ui_chart",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "group": "4be2d3e144a06d0d",
+        "order": 12,
+        "width": 9,
+        "height": 6,
+        "label": "Biểu đồ  Áp suất khí quyển",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 850,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93fc41ebd2be8212",
+        "type": "insertOne",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "x": 840,
+        "y": 960,
+        "wires": [
+            [
+                "beba25885860385a"
+            ]
+        ]
+    },
+    {
+        "id": "d270f9072116b1cb",
+        "type": "mqtt in",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "topic": "Gas",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "51df87ab5fb6d1e4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 560,
+        "wires": [
+            [
+                "6ccb2dbcb964c706",
+                "4007ce894e54ea20",
+                "5a9a518e75370113",
+                "4e2160bac7064c16"
+            ]
+        ]
+    },
+    {
+        "id": "6ccb2dbcb964c706",
+        "type": "ui_gauge",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "group": "4bf0b6aee7a9c3d1",
+        "order": 2,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Co2",
+        "label": "ppm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 790,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "5a9a518e75370113",
+        "type": "ui_chart",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "group": "4bf0b6aee7a9c3d1",
+        "order": 12,
+        "width": 10,
+        "height": 6,
+        "label": "Biểu đồ khí Co2",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 820,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4e2160bac7064c16",
+        "type": "function",
+        "z": "2960a91d4027dbbd",
+        "name": "Set flow CO2",
+        "func": "var CO2;\nCO2 = msg.payload;\nflow.set(\"Gas\",CO2);\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 1040,
+        "wires": [
+            [
+                "a8fbbccecb7c2bb0"
+            ]
+        ]
+    },
+    {
+        "id": "70cd773945c6fb7d",
+        "type": "mqtt in",
+        "z": "2960a91d4027dbbd",
+        "name": "Bụi",
+        "topic": "BUI",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "51df87ab5fb6d1e4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 680,
+        "wires": [
+            [
+                "43e51cdafab49e75",
+                "41720ad06d162cc7",
+                "4007ce894e54ea20",
+                "78ae4307f044d8d0"
+            ]
+        ]
+    },
+    {
+        "id": "43e51cdafab49e75",
+        "type": "ui_chart",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "group": "647709fe9c2e12fa",
+        "order": 12,
+        "width": 10,
+        "height": 6,
+        "label": "Biểu đồ bụi",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "5",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 810,
+        "y": 760,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "41720ad06d162cc7",
+        "type": "ui_gauge",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "group": "647709fe9c2e12fa",
+        "order": 2,
+        "width": 5,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Bụi",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "5",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 790,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "78ae4307f044d8d0",
+        "type": "function",
+        "z": "2960a91d4027dbbd",
+        "name": "Set flow Bụi",
+        "func": "var BUI;\nBUI = msg.payload;\nflow.set(\"BUI\",BUI);\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 820,
+        "wires": [
+            [
+                "a8fbbccecb7c2bb0"
+            ]
+        ]
+    },
+    {
+        "id": "df3ba1137fd603c7",
+        "type": "inject",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 2960,
+        "wires": [
+            [
+                "8d84edcf227b6329"
+            ]
+        ]
+    },
+    {
+        "id": "3c6a82d0d702b595",
+        "type": "debug",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 2960,
+        "wires": []
+    },
+    {
+        "id": "8d84edcf227b6329",
+        "type": "function",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "func": "var time = new Date();\nvar Tem =flow.get(\"Tem\");\nvar Hum =flow.get(\"Hum\");\nvar Per =flow.get(\"Per\");\nvar BUI =flow.get(\"BUI\");\nvar CO2 =flow.get(\"Gas\");\nif (Tem == null || Hum == null || Per == null || BUI == null )\n{\n    return;\n    \n}\nelse\n{\n    var A = {\"Nhiệt ĐỘ\":Tem, \"Độ ẩm\":Hum, \"Áp suất\":Per, \"CO2\":CO2,  \"Bụi\": BUI, \"Time\":time};\n}\nmsg.url = \"mongodb+srv://Ken:Kennguyen2001@cluster0.pjdpj.mongodb.net/DAHTN?retryWrites=true&w=majority\";\nmsg.db_name = \"DAHTN\";\nmsg.db_collection = \"Test\";\nmsg.payload= A;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 2960,
+        "wires": [
+            [
+                "e589cea07c7025e2"
+            ]
+        ]
+    },
+    {
+        "id": "e589cea07c7025e2",
+        "type": "insertOne",
+        "z": "2960a91d4027dbbd",
+        "name": "",
+        "x": 700,
+        "y": 2960,
+        "wires": [
+            [
+                "3c6a82d0d702b595"
+            ]
+        ]
+    },
+    {
+        "id": "51df87ab5fb6d1e4",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.1.15",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "538e811e.4dc51",
+        "type": "ui_group",
+        "name": "LEFT_RIGHT_LIGHT",
+        "tab": "649f5a53534bf2b2",
+        "order": 1,
+        "disp": true,
+        "width": "5",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "4be2d3e144a06d0d",
+        "type": "ui_group",
+        "name": "BMP280",
+        "tab": "bbe99358.4e00c",
+        "order": 3,
+        "disp": true,
+        "width": 10,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4bf0b6aee7a9c3d1",
+        "type": "ui_group",
+        "name": "MQ135",
+        "tab": "bbe99358.4e00c",
+        "order": 2,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "647709fe9c2e12fa",
+        "type": "ui_group",
+        "name": "GP2Y101AU0F",
+        "tab": "bbe99358.4e00c",
+        "order": 4,
+        "disp": true,
+        "width": "10",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "649f5a53534bf2b2",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "bbe99358.4e00c",
+        "type": "ui_tab",
+        "name": "MQTT COURSE",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
